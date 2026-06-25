@@ -6,7 +6,7 @@ const app = express();
 const PORT = process.env.PORT || 3000;
 
 const pool = new Pool({
-  connectionString: `postgresql://admin:admin123@localhost:5432/aubonheur`,
+  connectionString: `postgresql://admin:admin123@127.0.0.1:5432/aubonheur`,
   ssl: false
 });
 
