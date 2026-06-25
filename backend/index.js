@@ -1,26 +1,18 @@
 const express = require('express');
-const { Pool } = require('pg');
-require('dotenv').config();
-
 const app = express();
+require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 
-const pool = new Pool({
-  connectionString: `postgresql://admin:admin123@127.0.0.1:5432/aubonheur`,
-  ssl: false
-});
+// Connexion base de données
+require('./config/db');
 
-pool.connect((err, client, release) => {
-  if (err) {
-    console.error('❌ Erreur de connexion à la base de données:', err.message);
-  } else {
-    console.log('✅ Connecté à PostgreSQL avec succès !');
-    release();
-  }
-});
-
+// Middleware
 app.use(express.json());
 
+// Routes
+app.use('/auth', require('./routes/auth'));
+
+// Route de test
 app.get('/', (req, res) => {
   res.send('Le serveur fonctionne ! 🎉');
 });
