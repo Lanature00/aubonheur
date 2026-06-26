@@ -4,26 +4,21 @@ require('dotenv').config();
 const PORT = process.env.PORT || 3000;
 const { verifierToken, verifierAdmin } = require('./middleware/authMiddleware');
 
-// Connexion base de données
 require('./config/db');
 
-// Middleware
 app.use(express.json());
 
-// Routes
 app.use('/auth', require('./routes/auth'));
+app.use('/reservations', require('./routes/reservations'));
 
-// Route protégée de test
 app.get('/protected', verifierToken, (req, res) => {
   res.json({ message: 'Accès autorisé !', utilisateur: req.utilisateur });
 });
 
-// Route admin de test
 app.get('/admin', verifierToken, verifierAdmin, (req, res) => {
   res.json({ message: 'Bienvenue dans le backoffice admin !' });
 });
 
-// Route de test
 app.get('/', (req, res) => {
   res.send('Le serveur fonctionne ! 🎉');
 });
