@@ -12,7 +12,7 @@ require('./config/db');
 app.use(helmet());
 
 app.use(cors({
-  origin: ['http://localhost:5173', 'https://aubonheur-production.up.railway.app'],
+  origin: process.env.CORS_ORIGIN,
   methods: ['GET', 'POST', 'PUT', 'DELETE'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
