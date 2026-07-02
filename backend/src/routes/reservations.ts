@@ -1,21 +1,19 @@
-const express = require('express');
-const router = express.Router();
-const {
+import { Router } from 'express';
+import {
   creerReservation,
   mesReservations,
   annulerReservation,
   toutesLesReservations,
   changerStatut
-} = require('../controllers/reservationController');
-const { verifierToken, verifierAdmin } = require('../middleware/authMiddleware');
+} from '../controllers/reservationController';
+import { verifierToken, verifierAdmin } from '../middleware/authMiddleware';
 
-// Routes client (nécessitent d'être connecté)
+const router = Router();
+
 router.post('/', verifierToken, creerReservation);
 router.get('/mes-reservations', verifierToken, mesReservations);
 router.put('/annuler/:id', verifierToken, annulerReservation);
-
-// Routes admin (nécessitent d'être admin)
 router.get('/admin/toutes', verifierToken, verifierAdmin, toutesLesReservations);
 router.put('/admin/statut/:id', verifierToken, verifierAdmin, changerStatut);
 
-module.exports = router;
+export const reservationRouter = router;
