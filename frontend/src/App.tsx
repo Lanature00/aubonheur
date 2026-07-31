@@ -5,6 +5,7 @@ import Register from './pages/Register'
 import Reservation from './pages/Reservation'
 import MesReservations from './pages/MesReservations'
 import Admin from './pages/Admin'
+import Navbar from './components/Navbar'
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth()
@@ -20,20 +21,23 @@ function AdminRoute({ children }: { children: React.ReactNode }) {
 
 function AppContent() {
   return (
-    <Routes>
-      <Route path="/" element={<div>Page accueil</div>} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/register" element={<Register />} />
-      <Route path="/reservations" element={
-        <ProtectedRoute><Reservation /></ProtectedRoute>
-      } />
-      <Route path="/mes-reservations" element={
-      <ProtectedRoute><MesReservations /></ProtectedRoute>
-      } />
-      <Route path="/admin" element={
-      <AdminRoute><Admin /></AdminRoute>
-      } />
-    </Routes>
+    <>
+      <Navbar />
+      <Routes>
+        <Route path="/" element={<div>Page accueil</div>} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/reservations" element={
+          <ProtectedRoute><Reservation /></ProtectedRoute>
+        } />
+        <Route path="/mes-reservations" element={
+          <ProtectedRoute><MesReservations /></ProtectedRoute>
+        } />
+        <Route path="/admin" element={
+          <AdminRoute><Admin /></AdminRoute>
+        } />
+      </Routes>
+    </>
   )
 }
 
