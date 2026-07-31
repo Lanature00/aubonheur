@@ -2,23 +2,35 @@ import { Routes, Route, Navigate } from 'react-router-dom'
 import { AuthProvider, useAuth } from './context/AuthContext'
 import Login from './pages/Login'
 import Register from './pages/Register'
+import Reservation from './pages/Reservation'
+import MesReservations from './pages/MesReservations'
+
+function ProtectedRoute({ children }: { children: React.ReactNode }) {
+  const { isAuthenticated } = useAuth()
+  if (!isAuthenticated) return <Navigate to="/login" replace />
+  return <>{children}</>
+}
+
+function AdminRoute({ children }: { children: React.ReactNode }) {
+  const { isAdmin } = useAuth()
+  if (!isAdmin) return <Navigate to="/" replace />
+  return <>{children}</>
+}
 
 function AppContent() {
-  const { isAuthenticated, isAdmin } = useAuth()
-
   return (
     <Routes>
       <Route path="/" element={<div>Page accueil</div>} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route path="/reservations" element={
-        isAuthenticated ? <div>Réservations</div> : <Navigate to="/login" />
+        <ProtectedRoute><Reservation /></ProtectedRoute>
       } />
       <Route path="/mes-reservations" element={
-        isAuthenticated ? <div>Mes réservations</div> : <Navigate to="/login" />
+      <ProtectedRoute><MesReservations /></ProtectedRoute>
       } />
       <Route path="/admin" element={
-        isAdmin ? <div>Admin</div> : <Navigate to="/" />
+        <AdminRoute><div>Admin</div></AdminRoute>
       } />
     </Routes>
   )
