@@ -4,6 +4,7 @@ import Login from './pages/Login'
 import Register from './pages/Register'
 import Reservation from './pages/Reservation'
 import MesReservations from './pages/MesReservations'
+import Admin from './pages/Admin'
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth()
@@ -30,7 +31,7 @@ function AppContent() {
       <ProtectedRoute><MesReservations /></ProtectedRoute>
       } />
       <Route path="/admin" element={
-        <AdminRoute><div>Admin</div></AdminRoute>
+      <AdminRoute><Admin /></AdminRoute>
       } />
     </Routes>
   )
