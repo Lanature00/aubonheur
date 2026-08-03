@@ -6,6 +6,7 @@ import Reservation from './pages/Reservation'
 import MesReservations from './pages/MesReservations'
 import Admin from './pages/Admin'
 import Navbar from './components/Navbar'
+import Home from './pages/Home'
 
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { isAuthenticated } = useAuth()
@@ -24,7 +25,7 @@ function AppContent() {
     <>
       <Navbar />
       <Routes>
-        <Route path="/" element={<div>Page accueil</div>} />
+        <Route path="/" element={<Home />} />
         <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
         <Route path="/reservations" element={
