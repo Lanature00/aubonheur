@@ -1,11 +1,10 @@
-import { useState } from 'react'
+
 import { Link, useNavigate } from 'react-router-dom'
 import { useAuth } from '../context/AuthContext'
 
 function Navbar() {
   const { isAuthenticated, isAdmin, logout } = useAuth()
   const navigate = useNavigate()
-  const [menuOpen, setMenuOpen] = useState(false)
 
   const handleLogout = () => {
     logout()
