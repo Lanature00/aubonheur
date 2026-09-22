@@ -23,6 +23,38 @@ body {
   font-weight: 300;
 }
 
-h1, h2, h3, h4 {
+h1,
+h2,
+h3,
+h4 {
   font-family: 'Cormorant Garamond', serif;
+}
+
+input,
+select,
+textarea {
+  background-color: var(--dark-3);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  color: var(--white);
+  border-radius: 0.75rem;
+  transition: all 0.2s ease;
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: rgba(245, 240, 232, 0.45);
+}
+
+input:focus,
+select:focus,
+textarea:focus {
+  outline: none;
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(201, 169, 110, 0.15);
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(88%) sepia(14%) saturate(531%) hue-rotate(357deg)
+    brightness(90%) contrast(88%);
+  cursor: pointer;
 }
